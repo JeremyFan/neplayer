@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
+import actions from './actions/page/usersonglist'
 import Song from './components/Song'
 
 class App extends Component {
@@ -10,9 +11,9 @@ class App extends Component {
   }
 
   render() {
-    let { songs } = this.props
+    let { tracks } = this.props
 
-    const songLis = songs.map(song => (
+    const songLis = tracks.map(song => (
       <Song
         key={song.id}
         {...song}
@@ -25,10 +26,14 @@ class App extends Component {
       </ul>
     )
   }
+
+  componentDidMount(){
+    this.props.dispatch(actions.fetchSongs(930215890))
+  }
 }
 
 export default connect(state => {
   return {
-    ...state.locallist
+    ...state.usersonglist
   }
 })(App)

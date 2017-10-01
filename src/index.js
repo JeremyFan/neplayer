@@ -1,7 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 
 import 'whatwg-fetch'
 import 'howler'
@@ -9,7 +10,7 @@ import 'howler'
 import reducers from './reducers'
 import App from './App'
 
-let store = createStore(reducers)
+let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 render(
   <Provider store={store}>
@@ -17,15 +18,3 @@ render(
   </Provider>,
   document.getElementById('app')
 )
-
-// fetch('/api/music/url?id=347230')
-//   .then(res => res.json())
-//   .then(({ code, data }) => {
-//     console.log(data)
-//     let sound = new Howl({
-//       src: [data[0].url],
-//       // html5:true
-//     });
-
-//     sound.play();
-//   })
