@@ -17,7 +17,6 @@ class Album extends Component {
     return (
       <Songlist
         songs={songs}
-        text={'123'}
       />
     )
   }

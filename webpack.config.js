@@ -9,7 +9,7 @@ module.exports = {
     proxy: {
       "/api": {
         target: "http://localhost:3000",
-        pathRewrite: {"^/api" : ""}
+        pathRewrite: { "^/api": "" }
       }
     }
   },
@@ -33,7 +33,22 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: path.resolve(__dirname, 'node_modules'),
         use: 'babel-loader'
-      }
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          'style-loader',
+          {
+            loader:'css-loader',
+            options:{
+              modules: true,
+              camelCase: true,
+              localIdentName: '[local]__[hash:base64:5]'
+            }
+          },
+          'postcss-loader',
+          'stylus-loader']
+      },
     ]
   }
 }

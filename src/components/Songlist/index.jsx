@@ -2,7 +2,11 @@
  * @file 基础歌曲列表组件
  */
 import React from 'react'
-import Song from './Song'
+
+import styles from './index.styl'
+import Song from '../Song'
+
+console.log(styles)
 
 const Songlist = (props) => {
   const songItems = props.songs.map(song => (
@@ -14,7 +18,7 @@ const Songlist = (props) => {
 
   return (
     <div>
-      <div>
+      <div className={styles.songlistHeader}>
         <span>歌曲</span>
         <span>歌手</span>
         <span>专辑</span>
