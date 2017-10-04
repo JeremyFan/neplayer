@@ -7,14 +7,18 @@ import thunkMiddleware from 'redux-thunk'
 import 'whatwg-fetch'
 import 'howler'
 
+import routes from './routes'
 import reducers from './reducers'
 import App from './App'
+import Test from './test'
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 render(
   <Provider store={store}>
-    <App />
+    {/* <App /> */}
+    { routes }
+    {/* <Test /> */}
   </Provider>,
   document.getElementById('app')
 )

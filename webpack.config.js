@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   entry: [
-    './src/index.js',
+    './src/index.jsx',
     'webpack-dev-server/client?http://localhost:8005'
   ],
 
