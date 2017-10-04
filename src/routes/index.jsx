@@ -9,9 +9,9 @@ const routes = (
   <Router>
     <div>
       <Route exact path="/" component={Home} />
-      <Route path="/playlist" component={Playlist} />
-      <Route path="/album" component={Album} />
-      <Route path="/artist" component={Artist} />
+      <Route path="/playlist/:id" component={Playlist} />
+      <Route path="/album/:id" component={Album} />
+      <Route path="/artist/:id" component={Artist} />
     </div>
   </Router>
 )

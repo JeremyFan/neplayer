@@ -9,16 +9,14 @@ import 'howler'
 
 import routes from './routes'
 import reducers from './reducers'
-import App from './App'
-import Test from './test'
+// import App from './App'
+import Album from './containers/Album'
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
 render(
   <Provider store={store}>
-    {/* <App /> */}
     { routes }
-    {/* <Test /> */}
   </Provider>,
   document.getElementById('app')
 )
