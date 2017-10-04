@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
 import actions from '../actions/page/albumlist'
-import Song from '../components/Song'
+// import Song from '../components/Song'
+import Songlist from '../components/Songlist'
 
 class Album extends Component {
   constructor(props) {
@@ -13,17 +14,11 @@ class Album extends Component {
   render() {
     let { songs } = this.props
 
-    const songLis = songs.map(song => (
-      <Song
-        key={song.id}
-        {...song}
-      />
-    ))
-
     return (
-      <ul>
-        {songLis}
-      </ul>
+      <Songlist
+        songs={songs}
+        text={'123'}
+      />
     )
   }
 
