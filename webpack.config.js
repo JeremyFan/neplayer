@@ -39,15 +39,21 @@ module.exports = {
         use: [
           'style-loader',
           {
-            loader:'css-loader',
-            options:{
+            loader: 'css-loader',
+            options: {
               modules: true,
               camelCase: true,
               localIdentName: '[local]__[hash:base64:5]'
             }
           },
           'postcss-loader',
-          'stylus-loader']
+          {
+            loader: 'stylus-loader',
+            options: {
+              sourceMap: false
+            }
+          }
+        ]
       },
     ]
   }
