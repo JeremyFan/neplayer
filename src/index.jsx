@@ -5,8 +5,8 @@ import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 
 import 'whatwg-fetch'
-import 'howler'
 
+import Player from './player'
 import routes from './routes'
 import reducers from './reducers'
 // import App from './App'
@@ -16,9 +16,11 @@ import './styl/reset.styl'
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
+window.player = new Player
+
 render(
   <Provider store={store}>
-    { routes }
+    {routes}
   </Provider>,
   document.getElementById('app')
 )
