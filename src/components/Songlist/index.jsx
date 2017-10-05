@@ -1,34 +1,44 @@
 /**
  * @file 基础歌曲列表组件
  */
-import React from 'react'
+import React, { Component } from 'react'
 
 import styles from './index.styl'
 import Song from '../Song'
 
-console.log(styles)
+class Songlist extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-const Songlist = (props) => {
-  const songItems = props.songs.map(song => (
-    <Song
-      key={song.id}
-      {...song}
-    />
-  ))
+  handleClick(songId) {
+    window.player.play(songId)
+  }
 
-  return (
-    <div>
-      <div className={styles.songlistHeader}>
-        <span>歌曲</span>
-        <span>歌手</span>
-        <span>专辑</span>
-        <span>时长</span>
+  render() {
+    const songItems = this.props.songs.map(song => (
+      <Song
+        key={song.id}
+        {...song}
+
+        onClick={() => this.handleClick(song.id)}
+      />
+    ))
+
+    return (
+      <div>
+        <div className={styles.songlistHeader}>
+          <span>歌曲</span>
+          <span>歌手</span>
+          <span>专辑</span>
+          <span>时长</span>
+        </div>
+        <ul>
+          {songItems}
+        </ul>
       </div>
-      <ul>
-        {songItems}
-      </ul>
-    </div>
-  )
+    )
+  }
 }
 
 export default Songlist
