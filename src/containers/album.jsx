@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
 import actions from '../actions/page/albumlist'
-// import Song from '../components/Song'
+import playActions from '../actions/player/playlist'
 import Songlist from '../components/Songlist'
+
+import Background from '../components/Background'
 
 class Album extends Component {
   constructor(props) {
@@ -12,24 +14,35 @@ class Album extends Component {
   }
 
   render() {
-    let { songs } = this.props
+    const { songs, album } = this.props
 
     return (
-      <Songlist
-        songs={songs}
-      />
+      <div>
+        <Songlist songs={songs} />
+        <Background imgUrl={album.picUrl} />
+      </div>
     )
   }
 
   componentDidMount() {
     const { match } = this.props
     const { id } = match.params
-    this.props.dispatch(actions.fetchSongs(id))
+
+    this.props.fetchAlbumInfo(id)
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchAlbumInfo(id) {
+      dispatch(actions.fetchSongs(id))
+    }
   }
 }
 
 export default connect(state => {
   return {
-    ...state.albumlist
+    ...state.albumlist,
+    ...state.playlist
   }
-})(Album)
+}, mapDispatchToProps)(Album)
