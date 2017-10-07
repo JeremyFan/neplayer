@@ -16,8 +16,9 @@ class Songlist extends Component {
   }
 
   render() {
-    const songItems = this.props.songs.map(song => (
+    const songItems = this.props.songs.map((song,i) => (
       <Song
+        index={i}
         key={song.id}
         {...song}
 
@@ -26,17 +27,9 @@ class Songlist extends Component {
     ))
 
     return (
-      <div>
-        <div className={styles.songlistHeader}>
-          <span>歌曲</span>
-          <span>歌手</span>
-          <span>专辑</span>
-          <span>时长</span>
-        </div>
-        <ul>
-          {songItems}
-        </ul>
-      </div>
+      <ol className={styles.songlist}>
+        {songItems}
+      </ol>
     )
   }
 }
