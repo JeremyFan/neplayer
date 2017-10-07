@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
-import actions from '../actions/page/albumlist'
-import playActions from '../actions/player/playlist'
-import Songlist from '../components/Songlist'
+import actions from '../../actions/page/albumlist'
+import playActions from '../../actions/player/playlist'
 
-import Background from '../components/Background'
+import Songlist from '../../components/Songlist'
+import Background from '../../components/Background'
+import CurrentList from '../../components/CurrentList'
+
+import styles from './index.styl'
 
 class Album extends Component {
   constructor(props) {
@@ -18,7 +21,10 @@ class Album extends Component {
 
     return (
       <div>
-        <Songlist songs={songs} />
+        <section>
+          <Songlist songs={songs} />
+          <CurrentList album={album} />
+        </section>
         <Background imgUrl={album.picUrl} />
       </div>
     )
