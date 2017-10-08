@@ -1,13 +1,15 @@
 import React from 'react'
 
 import styles from './index.styl'
+import { getDuration } from '../../util'
+
 
 const Song = props => {
   const arNames = props.ar.map(ar => ar.name)
 
   return (
     <li className={styles.song} onClick={props.onClick}>
-      <div className={styles.songIndex}>{props.index+1+'.'}</div>
+      <div className={styles.songIndex}>{props.index + 1 + '.'}</div>
       <div className={styles.songInfo}>
         <div className={styles.name}>{props.name}</div>
         <div className={styles.more}>
@@ -16,7 +18,7 @@ const Song = props => {
           <span className="album">{props.al.name}</span>
         </div>
       </div>
-      <div className={styles.songDuration}>{props.dt}</div>
+      <div className={styles.songDuration}>{getDuration(props.dt)}</div>
     </li>
   )
 }
