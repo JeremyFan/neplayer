@@ -3,21 +3,28 @@
  */
 
 import React from 'react'
+
+import Album from './Album'
+import Artist from './Artist'
+import UserList from './UserList'
 import styles from './index.styl'
 
 import { getPublishYear, getPicUrl } from '../../util'
 
 const CurrentList = props => {
+  const picUrl = getPicUrl(props.picUrl, 240)
 
-  const arNames = props.album.artists.map(artist => artist.name)
-  const publishYear = getPublishYear(props.album.publishTime)
-  const picUrl = getPicUrl(props.album.picUrl, 240)
-
+  let info = <Album {...props.info} />
+  if (props.type === 'userlist') {
+    info = <UserList {...props.info} />
+  } else if (props.type === 'artist') {
+    info = <Artist {...props.info} />
+  }
+  
   return (
     <div className={styles.currentList}>
       <img src={picUrl} />
-      <div className={styles.alName}>{props.album.name}</div>
-      <div className={styles.arName}><span>By</span> {arNames.join('/')} · {publishYear}</div>
+      {info}
     </div>
   )
 }
