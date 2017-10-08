@@ -5,13 +5,21 @@
 import React from 'react'
 import styles from './index.styl'
 
-const CurrentList = props => (
-  <div className={styles.currentList}>
-    <img src="http://p3.music.126.net/Eo1m0dBH77rhvvAqUwVxKQ==/6644348767578000.jpg" />
-    <p className={styles.alName}>London Calling</p>
-    <p className={styles.arName}>the Clash</p>
-    <p></p>
-  </div>
-)
+import { getPublishYear, getPicUrl } from '../../util'
+
+const CurrentList = props => {
+
+  const arNames = props.album.artists.map(artist => artist.name)
+  const publishYear = getPublishYear(props.album.publishTime)
+  const picUrl = getPicUrl(props.album.picUrl, 240)
+
+  return (
+    <div className={styles.currentList}>
+      <img src={picUrl} />
+      <div className={styles.alName}>{props.album.name}</div>
+      <div className={styles.arName}><span>By</span> {arNames.join('/')} · {publishYear}</div>
+    </div>
+  )
+}
 
 export default CurrentList
