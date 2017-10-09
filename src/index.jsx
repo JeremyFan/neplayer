@@ -13,6 +13,7 @@ import reducers from './reducers'
 import Album from './containers/Album'
 
 import './styl/reset.styl'
+import './styl/base.styl'
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 

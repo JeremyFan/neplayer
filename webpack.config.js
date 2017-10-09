@@ -55,6 +55,16 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.(jpg|png|gif|ttf|otf)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: 'static/[name].[ext]'
+          },
+        }]
+      }
     ]
   }
 }
