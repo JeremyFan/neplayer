@@ -3,42 +3,42 @@
  */
 
 const ActionTypes = {
-  FETCH_SONGS_STARTED: Symbol(),
-  FETCH_SONGS_SUCCESS: Symbol(),
-  FETCH_SONGS_FAILURE: Symbol(),
+  FETCH_ALBUM_STARTED: Symbol(),
+  FETCH_ALBUM_SUCCESS: Symbol(),
+  FETCH_ALBUM_FAILURE: Symbol(),
 }
 
 const actions = {
-  fetchSongsStarted() {
+  fetchAlbumStarted() {
     return {
-      type: ActionTypes.FETCH_SONGS_STARTED,
+      type: ActionTypes.FETCH_ALBUM_STARTED,
       payload: {}
     }
   },
-  fetchSongsSuccess(res) {
+  fetchAlbumSuccess(res) {
     const { songs, album } = res
     return {
-      type: ActionTypes.FETCH_SONGS_SUCCESS,
+      type: ActionTypes.FETCH_ALBUM_SUCCESS,
       payload: { songs, album }
     }
   },
-  fetchSongsFailure(error) {
+  fetchAlbumFailure(error) {
     return {
-      type: ActionTypes.FETCH_SONGS_FAILURE,
+      type: ActionTypes.FETCH_ALBUM_FAILURE,
       payload: { error }
     }
   },
 
-  fetchSongs(ablumId) {
+  fetchAlbumInfo(ablumId) {
     return (dispatch) => {
       const url = `/api/album?id=${ablumId}`
 
-      dispatch(actions.fetchSongsStarted())
+      dispatch(actions.fetchAlbumStarted())
 
       fetch(url)
         .then(res => res.json())
         .then(res => {
-          dispatch(actions.fetchSongsSuccess(res))
+          dispatch(actions.fetchAlbumSuccess(res))
         })
     }
   },

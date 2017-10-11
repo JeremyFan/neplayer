@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
-import actions from '../../actions/page/albumlist'
+import actions from '../../actions/page/albumList'
 import playActions from '../../actions/player/playlist'
 
 import Songlist from '../../components/Songlist'
@@ -22,8 +22,12 @@ class Album extends Component {
     return (
       <div>
         <section>
+          <CurrentList
+            type="album"
+            picUrl={album.picUrl}
+            info={album}
+          />
           <Songlist songs={songs} />
-          <CurrentList album={album} />
         </section>
         <Background imgUrl={album.picUrl} />
       </div>
@@ -41,14 +45,14 @@ class Album extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchAlbumInfo(id) {
-      dispatch(actions.fetchSongs(id))
+      dispatch(actions.fetchAlbumInfo(id))
     }
   }
 }
 
 export default connect(state => {
   return {
-    ...state.albumlist,
+    ...state.albumList,
     ...state.playlist
   }
 }, mapDispatchToProps)(Album)
