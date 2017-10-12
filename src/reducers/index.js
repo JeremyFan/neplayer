@@ -1,13 +1,17 @@
 import {combineReducers} from 'redux'
 
 import locallist from './page/locallist'
-import usersonglist from './page/usersonglist'
-import albumlist from './page/albumlist'
+import userList from './page/userList'
+import albumList from './page/albumList'
+import artistList from './page/artistList'
 import playlist from './player/playlist'
 
 export default combineReducers({
   locallist,
-  usersonglist,
-  albumlist,
+
+  albumList,
+  artistList,
+  userList,
+  
   playlist,
 })
