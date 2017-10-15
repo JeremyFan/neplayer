@@ -13,7 +13,7 @@ const Song = props => {
       <div className={styles.songInfo}>
         <div className={styles.name}>{props.name}</div>
         <div className={styles.more}>
-          <span className="artist">{arNames.join('，')}</span>
+          <span className="artist">{arNames.join('/')}</span>
           <span className={styles.split}>·</span>
           <span className="album">{props.al.name}</span>
         </div>
