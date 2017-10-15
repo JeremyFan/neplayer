@@ -7,6 +7,7 @@ import playActions from '../../actions/player/playlist'
 
 import CurrentList from '../../components/CurrentList'
 import Songlist from '../../components/Songlist'
+import PlayerBar from '../../components/PlayerBar'
 import Background from '../../components/Background'
 
 import styles from './index.styl'
@@ -17,21 +18,28 @@ class Artist extends Component {
   }
 
   render() {
-    const { songs, info } = this.props
+    const { songs, info, current } = this.props
+
+    const currentSong = this.getCurrentSongs(songs, current)
 
     return (
-      <div>
-        <section>
+      <div className={styles.page}>
+        <section className={styles.sec}>
           <CurrentList
             type="userlist"
             picUrl={info.coverImgUrl}
             info={info}
           />
-          <Songlist songs={songs} />
+          <Songlist songs={songs} {...this.props} />
         </section>
-        <Background imgUrl={info.picUrl} />
+        <PlayerBar song={currentSong} />
+        <Background imgUrl={info.coverImgUrl} />
       </div>
     )
+  }
+
+  getCurrentSongs(songs, id) {
+    return songs.find(s => s.id === id)
   }
 
   componentDidMount() {
@@ -46,7 +54,14 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchUserListInfo(id) {
       dispatch(actions.fetchUserListInfo(id))
-    }
+    },
+
+    playSong(id) {
+      // FIXME 暂时先放这里
+      // window.player.play(id)
+
+      dispatch(playActions.playSong(id))
+    },
   }
 }
 
