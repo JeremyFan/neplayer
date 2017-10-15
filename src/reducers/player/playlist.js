@@ -5,12 +5,12 @@
 import { ActionTypes } from '../../actions/player/playlist'
 
 const initialState = {
-  links: [],
-  hasLink: false,
+  list: [],
+  current: 0,
 }
 
 export default (state = initialState, { type, payload }) => {
-  if (type === ActionTypes.FETCH_SONGLINK_SUCCESS) {
+  if (type === ActionTypes.PLAY_SONG) {
     return {
       ...state,
       ...payload

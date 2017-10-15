@@ -4,50 +4,17 @@
  */
 
 const ActionTypes = {
-  FETCH_SONGLINK_START: Symbol(),
-  FETCH_SONGLINK_SUCCESS: Symbol(),
-  FETCH_SONGLINK_FAILURE: Symbol(),
   PLAY_SONG: Symbol(),
 }
 
 const actions = {
-  fetchSongLinkStart() {
-
-  },
-
-  fetchSongLinkSuccess(res) {
-    const { data } = res
-
+  playSong(id) {
     return {
-      type: ActionTypes.FETCH_SONGLINK_SUCCESS,
-      payload: { links: data, hasLink: true }
+      type: ActionTypes.PLAY_SONG,
+      payload: {
+        current: id
+      }
     }
-  },
-
-  fetchSongLinkFailure() {
-
-  },
-
-  /**
-   * 选链
-   * @param {Array} ids 歌曲id数组
-   */
-  fetchSongLink(ids) {
-    return (dispatch) => {
-      const url = `/api/music/url?id=${ids.join(',')}`
-
-      // dispatch(actions.fetchSongLinkStart())
-
-      fetch(url)
-        .then(res => res.json())
-        .then(res => {
-          dispatch(actions.fetchSongLinkSuccess(res))
-        })
-    }
-  },
-
-  playSong(id){
-    
   }
 }
 
