@@ -7,8 +7,10 @@ import { getDuration } from '../../util'
 const Song = props => {
   const arNames = props.ar.map(ar => ar.name)
 
+  const liClassName = props.isActive ? [styles.song, styles.active].join(' ') : styles.song
+
   return (
-    <li className={styles.song} onClick={props.onClick}>
+    <li className={liClassName} onClick={props.onClick}>
       <div className={styles.songIndex}>{props.index + 1 + '.'}</div>
       <div className={styles.songInfo}>
         <div className={styles.name}>{props.name}</div>

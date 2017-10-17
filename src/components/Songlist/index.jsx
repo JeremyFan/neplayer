@@ -12,16 +12,18 @@ class Songlist extends Component {
   }
 
   handleClick(songId) {
-    window.player.play(songId)
+    this.props.playSong(songId)
   }
 
   render() {
-    const songItems = this.props.songs.map((song,i) => (
+    const { songs, current } = this.props
+
+    const songItems = songs.map((song, i) => (
       <Song
         index={i}
         key={song.id}
         {...song}
-
+        isActive={song.id === current}
         onClick={() => this.handleClick(song.id)}
       />
     ))
