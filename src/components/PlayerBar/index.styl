@@ -1,3 +1,5 @@
+@import '../../styl/functions.styl'
+
 .bar
   position fixed
   left 0
@@ -17,8 +19,18 @@
       margin-right 10px
 
     .title
-      font-size 18px
-      margin 10px 0
+      font-size 1.2em
+      margin 15px 0
+      text-overflow()
 
     .desc
       opacity .75
+      text-overflow()
+  
+  .controls
+    .play
+      width 3em
+      height 3em
+    .pause
+      width 2em
+      height 2em
