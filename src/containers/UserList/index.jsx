@@ -9,6 +9,8 @@ import CurrentList from '../../components/CurrentList'
 import Songlist from '../../components/Songlist'
 import PlayerBar from '../../components/PlayerBar'
 import Background from '../../components/Background'
+import Scrollbar from '../../components/Scrollbar'
+
 
 import styles from './index.styl'
 
@@ -21,6 +23,7 @@ class Artist extends Component {
     const { songs, info, current } = this.props
 
     const currentSong = this.getCurrentSongs(songs, current)
+    const coverUrl = this.getCover(info, currentSong)
 
     return (
       <div className={styles.page}>
@@ -30,16 +33,27 @@ class Artist extends Component {
             picUrl={info.coverImgUrl}
             info={info}
           />
-          <Songlist songs={songs} {...this.props} />
+          <Scrollbar>
+            <Songlist {...this.props} />
+          </Scrollbar>
         </section>
         <PlayerBar song={currentSong} />
-        <Background imgUrl={info.coverImgUrl} />
+        <Background imgUrl={coverUrl} />
       </div>
     )
   }
 
   getCurrentSongs(songs, id) {
     return songs.find(s => s.id === id)
+  }
+
+  getCover(info, currentSong) {
+    let url = info.coverImgUrl
+
+    if (currentSong && currentSong.al && currentSong.al.picUrl)
+      url = currentSong.al.picUrl
+
+    return url
   }
 
   componentDidMount() {
