@@ -1,42 +1,90 @@
 import 'howler'
+import Events from './events'
 
 const howlConfig = {
-  html5: true
+  html5: true,
+  preload: false,
 }
 
 class Player {
   constructor() {
-    this._playlist = {}
+    this._playlist = []
+    this._howlerMap = {}
     this._currentSong = null
     this._currentHowler = null
+
+    Object.assign(this, Events)
   }
 
   play(id) {
-    if (this._playlist[id]) {
-      this._play(id)
-    } else {
-      this.fetchLink(id)
+    // if (this._howlerMap[id]) {
+      // this._play(id)
+    // } else {
+      this.fetchLink(this._playlist.join(','))
         .then(({ data }) => {
-          const url = data[0].url
-          this._createHowler(id, url)
+          this._createHowlerMap(data)
           this._play(id)
         })
+    // }
+  }
+
+  _createHowlerMap(data) {
+    data.forEach(song => {
+      this._howlerMap[song.id] = this._createHowler(song.id, song.url)
+    })
+  }
+
+  setList(list) {
+    if (Array.isArray(list)) {
+      this._playlist = list
     }
   }
 
+  pause(id) {
+    this._currentHowler.pause()
+  }
+
+  prev() {
+    const index = this._getCurrentIndex()
+
+    const prev = index === 0 ? this._playlist.length - 1 : index - 1
+
+    this.play(this._playlist[prev])
+  }
+
+  next() {
+    const index = this._getCurrentIndex()
+
+    const next = index === this._playlist.length - 1 ? 0 : index + 1
+
+    this.play(this._playlist[next])
+  }
+
+  _getCurrentIndex() {
+    return this._playlist.indexOf(this._currentSong)
+  }
+
   _createHowler(id, src) {
+    console.log(id,src)
     const howler = new Howl({
       src,
       ...howlConfig,
     })
 
-    this._playlist[id] = { howler }
+    return howler
   }
 
   _play(id) {
-    this._stopCurrentHowler()
-    this._currentHowler = this._playlist[id].howler
-    this._currentHowler.play()
+    if (this._currentSong === id) {
+      this._currentHowler.play()
+    } else {
+      this._stopCurrentHowler()
+      this._currentHowler = this._howlerMap[id]
+      this._currentHowler.play()
+    }
+
+    this.trigger('player:play', id)
+    this._currentSong = id
   }
 
   _stopCurrentHowler() {
