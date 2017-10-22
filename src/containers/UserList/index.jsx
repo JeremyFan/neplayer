@@ -20,7 +20,7 @@ class Artist extends Component {
   }
 
   render() {
-    const { songs, info, current } = this.props
+    const { songs, info, current, mode } = this.props
 
     const currentSong = this.getCurrentSongs(songs, current)
     const coverUrl = this.getCover(info, currentSong)
@@ -37,7 +37,8 @@ class Artist extends Component {
             <Songlist {...this.props} />
           </Scrollbar>
         </section>
-        <PlayerBar song={currentSong} />
+        {/* <PlayerBar song={currentSong} mode={mode} /> */}
+        <PlayerBar song={currentSong} {...this.props} />
         <Background imgUrl={coverUrl} />
       </div>
     )
@@ -71,11 +72,30 @@ const mapDispatchToProps = dispatch => {
     },
 
     playSong(id) {
-      // FIXME 暂时先放这里
-      // window.player.play(id)
-
       dispatch(playActions.playSong(id))
     },
+
+    updateList(listName, ids) {
+      window.player.setList(ids)
+
+      dispatch(playActions.updateList(listName, ids))
+    },
+
+    pause(id) {
+      dispatch(playActions.pause(id))
+    },
+
+    prev() {
+
+    },
+
+    next() {
+
+    },
+
+    changeMode(currentMode) {
+      dispatch(playActions.changeMode(currentMode))
+    }
   }
 }
 

@@ -5,14 +5,65 @@
 
 const ActionTypes = {
   PLAY_SONG: Symbol(),
+  PAUSE: Symbol(),
+  PREV: Symbol(),
+  NEXT: Symbol(),
+  CHANGE_MODE: Symbol(),
+  UPDATE_LIST: Symbol(),
 }
 
 const actions = {
+  /**
+   * 播放id
+   * @param {Number} id 歌曲id
+   */
   playSong(id) {
     return {
       type: ActionTypes.PLAY_SONG,
       payload: {
-        current: id
+        current: id,
+        playing: true
+      }
+    }
+  },
+
+  updateList(listName, ids) {
+    return {
+      type: ActionTypes.UPDATE_LIST,
+      payload: {
+        currentList: listName,
+        list: ids
+      }
+    }
+  },
+
+  pause(id) {
+    return {
+      type: ActionTypes.PAUSE,
+      payload: {
+        // current: id,
+        playing: false
+      }
+    }
+  },
+
+  prev() {
+
+  },
+
+  next() {
+
+  },
+
+  /**
+   * 切换播放模式
+   * @param {Number} prevMode 当前播放模式
+   */
+  changeMode(currentMode) {
+    return {
+      type: ActionTypes.CHANGE_MODE,
+      payload: {
+        mode: (currentMode + 1) % 3
       }
     }
   }
