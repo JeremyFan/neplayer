@@ -1,10 +1,7 @@
 import 'howler'
 import Events from './events'
+import { howlConfig } from './config'
 
-const howlConfig = {
-  html5: true,
-  preload: false,
-}
 
 class Player {
   constructor() {
@@ -17,22 +14,39 @@ class Player {
   }
 
   play(id) {
-    // if (this._howlerMap[id]) {
-      // this._play(id)
-    // } else {
-      this.fetchLink(this._playlist.join(','))
+    if (id === this._currentSong) {
+      this._currentHowler.play()
+      this.trigger('player:play', id)
+    } else {
+      this.fetchLink(id)
         .then(({ data }) => {
-          this._createHowlerMap(data)
-          this._play(id)
+          this._play(id, data[0].url)
         })
-    // }
+    }
   }
 
+  _play(id, url) {
+    if (this._currentHowler) {
+      this._currentHowler.unload()
+    }
+
+    this._currentHowler = this._createHowler(id, url)
+    this._currentHowler.play()
+
+    this.trigger('player:play', id)
+    this._currentSong = id
+  }
+
+  /**
+   * 创建Howler Map
+   * 遇到音频无法播放问题，所以不再使用这个方法为每个音频创建Howler
+   * @param {Array} data 选链数据 
+   
   _createHowlerMap(data) {
     data.forEach(song => {
       this._howlerMap[song.id] = this._createHowler(song.id, song.url)
     })
-  }
+  }*/
 
   setList(list) {
     if (Array.isArray(list)) {
@@ -42,6 +56,8 @@ class Player {
 
   pause(id) {
     this._currentHowler.pause()
+
+    this.trigger('player:pause', id)
   }
 
   prev() {
@@ -65,32 +81,12 @@ class Player {
   }
 
   _createHowler(id, src) {
-    console.log(id,src)
     const howler = new Howl({
       src,
       ...howlConfig,
     })
 
     return howler
-  }
-
-  _play(id) {
-    if (this._currentSong === id) {
-      this._currentHowler.play()
-    } else {
-      this._stopCurrentHowler()
-      this._currentHowler = this._howlerMap[id]
-      this._currentHowler.play()
-    }
-
-    this.trigger('player:play', id)
-    this._currentSong = id
-  }
-
-  _stopCurrentHowler() {
-    if (this._currentHowler) {
-      this._currentHowler.stop()
-    }
   }
 
   fetchLink(ids) {
