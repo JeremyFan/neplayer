@@ -13,7 +13,7 @@ const Song = props => {
     <li className={liClassName} onClick={props.onClick}>
       <div className={styles.songIndex}>
         <span className={styles.index}>{props.index + 1 + '.'}</span>
-        <Icon id={props.isActive ? "pause" : "play"} className={styles.play} />
+        <Icon id={props.isActive && props.playing ? "pause" : "play"} className={styles.play} />
       </div>
       <div className={styles.songInfo}>
         <div className={styles.name}>{props.name}</div>
