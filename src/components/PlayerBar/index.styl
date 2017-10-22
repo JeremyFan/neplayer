@@ -4,6 +4,8 @@
   position fixed
   left 0
   bottom 0
+  display flex
+  flex-direction row
   width 100%
   height 70px
   background rgba(0,0,0,.15)
@@ -11,8 +13,7 @@
   // background dodgerblue
   // background linear-gradient(105deg,#008b8b,dodgerblue)
   .info
-    float left
-    width 33.3%
+    width 40%
     .pic
       float left
       width 70px
@@ -29,9 +30,37 @@
       text-overflow()
   
   .controls
+    display flex
+    justify-content center
+    align-items center
+    width 20%
+    min-width 200px
     .play
       width 3em
       height 3em
+      margin 0 3em
     .pause
+      width 3em
+      height 3em
+
+    .prev
+    .next
       width 2em
       height 2em
+  
+  .more
+    display flex
+    justify-content flex-end
+    align-items center
+    width 40%
+
+    .mode
+      width 2em
+      height 2em
+      margin-right 1em
+    .volume
+      width 2em
+      height 2em
+    
+    .time
+      margin 0 1em
