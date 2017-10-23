@@ -8,7 +8,7 @@ import Song from './components/Song'
 class App extends Component {
   constructor(props) {
     super(props)
-  } 
+  }
 
   render() {
     let { tracks } = this.props
