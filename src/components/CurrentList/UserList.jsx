@@ -9,7 +9,9 @@ const Artist = props => {
   return (
     <div>
       <div className={styles.title}>{props.name}</div>
-      <div className={styles.desc}><span>By</span> {props.creator.nickname} · {createYear}</div>
+      {
+        props.creator.nickname && createYear && <div className={styles.desc}><span>By</span> {props.creator.nickname} · {createYear}</div>
+      }
     </div>
   )
 }

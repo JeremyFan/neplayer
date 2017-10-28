@@ -10,7 +10,9 @@ const Album = props => {
   return (
     <div>
       <div className={styles.title}>{props.name}</div>
-      <div className={styles.desc}><span>By</span> {arNames.join('/')} · {publishYear}</div>
+      {
+        arNames.length && publishYear && <div className={styles.desc}><span>By</span> {arNames.join('/')} · {publishYear}</div>
+      }
     </div>
   )
 }
