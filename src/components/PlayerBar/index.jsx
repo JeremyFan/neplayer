@@ -45,6 +45,7 @@ class PlayerBar extends Component {
         <div className={styles.more}>
           <Icon className={styles.mode} id={"mode-" + modeName} onClick={() => this.changeMode()} />
           <Icon className={styles.volume} id="volume" />
+          <progress className={styles.volumeProgress} value="20" max="100"></progress>
           <div className={styles.time}>
             00:50 / 04:02
           </div>
