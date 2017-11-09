@@ -26,6 +26,14 @@ class Player {
   }
 
   _play(id, url) {
+    this._currentSong = id
+    
+    if (!url) {
+      this.trigger('player:brokenurl', id)
+      this.next()
+      return
+    }
+
     if (this._currentHowler) {
       this._currentHowler.unload()
     }
@@ -34,7 +42,6 @@ class Player {
     this._currentHowler.play()
 
     this.trigger('player:play', id)
-    this._currentSong = id
   }
 
   /**
