@@ -18,12 +18,14 @@ const actions = {
   },
   fetchUserListSuccess(res) {
     const { tracks: songs, creator, name, id, createTime, coverImgUrl } = res.playlist
+    const privileges = res.privileges
+    
     const info = {
       creator, name, id, createTime, coverImgUrl
     }
     return {
       type: ActionTypes.FETCH_USERLIST_SUCCESS,
-      payload: { songs, info }
+      payload: { songs, privileges, info }
     }
   },
   fetchUserListFailure(error) {

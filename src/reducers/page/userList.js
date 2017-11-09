@@ -6,6 +6,7 @@ import { ActionTypes } from '../../actions/page/userList'
 
 const initialState = {
   songs: [],
+  privileges: [],
   info: {
     creator:{},
   },
