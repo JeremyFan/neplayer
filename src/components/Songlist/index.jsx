@@ -40,18 +40,25 @@ class Songlist extends Component {
   }
 
   render() {
-    const { songs, current, playing } = this.props
+    const { songs, current, playing, privileges } = this.props
 
-    const songItems = songs.map((song, i) => (
-      <Song
-        index={i}
-        key={song.id}
-        {...song}
-        isActive={song.id === current}
-        playing={playing}
-        onClick={() => this.handleClick(song.id)}
-      />
-    ))
+    const songItems = songs.map((song, i) => {
+      const privilege = privileges.filter(privilege => song.id == privilege.id)
+
+      const isOffline = privilege.length === 0 || privilege[0].st === -200
+
+      return (
+        <Song
+          index={i}
+          key={song.id}
+          {...song}
+          isActive={song.id === current}
+          isOffline={isOffline}
+          playing={playing}
+          onClick={() => this.handleClick(song.id)}
+        />
+      )
+    })
 
     return (
       <ol className={styles.songlist}>

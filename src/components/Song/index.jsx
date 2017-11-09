@@ -6,24 +6,30 @@ import { getDuration } from '../../util'
 
 
 const Song = props => {
-  const arNames = props.ar.map(ar => ar.name)
-  const liClassName = props.isActive ? [styles.song, styles.active].join(' ') : styles.song
+
+  const { index, ar, al, name, dt, isActive, isOffline, playing } = props
+
+  const arNames = ar.map(ar => ar.name)
+
+  const liClass = [styles.song]
+  if (isActive) liClass.push(styles.active)
+  if (isOffline) liClass.push(styles.offline)
 
   return (
-    <li className={liClassName} onClick={props.onClick}>
+    <li className={liClass.join(' ')} onClick={props.onClick}>
       <div className={styles.songIndex}>
-        <span className={styles.index}>{props.index + 1 + '.'}</span>
-        <Icon id={props.isActive && props.playing ? "pause" : "play"} className={styles.play} />
+        <span className={styles.index}>{index + 1 + '.'}</span>
+        {!isOffline && <Icon id={isActive && playing ? "pause" : "play"} className={styles.play} />}
       </div>
       <div className={styles.songInfo}>
-        <div className={styles.name}>{props.name}</div>
+        <div className={styles.name}>{name}</div>
         <div className={styles.more}>
           <span className="artist">{arNames.join('/')}</span>
           <span className={styles.split}>·</span>
-          <span className="album">{props.al.name}</span>
+          <span className="album">{al.name}</span>
         </div>
       </div>
-      <div className={styles.songDuration}>{getDuration(props.dt)}</div>
+      <div className={styles.songDuration}>{getDuration(dt)}</div>
     </li>
   )
 }
