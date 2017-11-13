@@ -14,6 +14,7 @@ const initialState = {
   currentList: '',
   // 是否正在播放
   playing: false,
+  volume: 50,
 }
 
 export default (state = initialState, { type, payload }) => {

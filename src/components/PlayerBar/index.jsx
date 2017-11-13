@@ -23,7 +23,7 @@ class PlayerBar extends Component {
   }
 
   render() {
-    const { song, mode, playing } = this.props
+    const { song, mode, playing, volume } = this.props
 
     if (!song) return null
 
@@ -43,9 +43,9 @@ class PlayerBar extends Component {
           <Icon className={styles.next} id="next" onClick={() => this.next()} />
         </div>
         <div className={styles.more}>
-          <Icon className={styles.mode} id={"mode-" + modeName} onClick={() => this.changeMode()} />
+          <Icon className={styles.mode} id={"mode-" + modeName} onClick={ ()=> this.changeMode()} />
           <Icon className={styles.volume} id="volume" />
-          <progress className={styles.volumeProgress} value="20" max="100"></progress>
+          <progress className={styles.volumeProgress} value={volume} max="100" onClick={e=>this.changeVolume(e)}></progress>
           <div className={styles.time}>
             00:50 / 04:02
           </div>
@@ -74,6 +74,10 @@ class PlayerBar extends Component {
 
   next() {
     window.player.next()
+  }
+
+  changeVolume(e){
+    
   }
 }
 
