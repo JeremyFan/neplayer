@@ -2,7 +2,7 @@
  * @file 用户歌单
  */
 
-import { ActionTypes } from '../../actions/page/userList'
+import { ActionTypes } from '../../actions/page/userlist'
 
 const initialState = {
   songs: [],

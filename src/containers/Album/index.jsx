@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
-import actions from '../../actions/page/albumList'
-import playActions from '../../actions/player/playlist'
+import actions from '../../redux/actions/page/albumlist'
+import playActions from '../../redux/actions/player/playlist'
 
 import Songlist from '../../components/Songlist'
 import Background from '../../components/Background'

@@ -2,7 +2,7 @@
  * @file 艺人相关
  */
 
-import { ActionTypes } from '../../actions/page/artistList'
+import { ActionTypes } from '../../actions/page/artistlist'
 
 const initialState = {
   songs: [],

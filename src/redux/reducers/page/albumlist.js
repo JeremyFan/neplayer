@@ -2,7 +2,7 @@
  * @file 专辑列表
  */
 
-import { ActionTypes } from '../../actions/page/albumList'
+import { ActionTypes } from '../../actions/page/albumlist'
 
 const initialState = {
   songs: [],

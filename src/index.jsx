@@ -8,7 +8,7 @@ import 'whatwg-fetch'
 
 import Player from './player'
 import routes from './routes'
-import reducers from './reducers'
+import reducers from './redux/reducers'
 // import App from './App'
 import Album from './containers/Album'
 
