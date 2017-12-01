@@ -101,7 +101,7 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(state => {
   return {
-    ...state.userList,
+    ...state.userlist,
     ...state.playlist
   }
 }, mapDispatchToProps)(Artist)
