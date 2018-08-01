@@ -18,9 +18,10 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload }) => {
-  if (type === ActionTypes.PLAY_SONG ||
-    type === ActionTypes.CHANGE_MODE ||
-    type === ActionTypes.PAUSE
+  if (type === ActionTypes.PLAY_SONG
+    || type === ActionTypes.CHANGE_MODE
+    || type === ActionTypes.PAUSE
+    || type === ActionTypes.UPDATE_VOLUME
   ) {
     return {
       ...state,

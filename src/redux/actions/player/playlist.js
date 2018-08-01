@@ -10,6 +10,7 @@ const ActionTypes = {
   NEXT: Symbol(),
   CHANGE_MODE: Symbol(),
   UPDATE_LIST: Symbol(),
+  UPDATE_VOLUME: Symbol(),
 }
 
 const actions = {
@@ -24,6 +25,13 @@ const actions = {
         current: id,
         playing: true
       }
+    }
+  },
+
+  updateVolume(volume) {
+    return {
+      type: ActionTypes.UPDATE_VOLUME,
+      payload: { volume },
     }
   },
 

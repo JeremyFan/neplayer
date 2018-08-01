@@ -6,7 +6,7 @@ import { howlConfig } from './config'
 class Player {
   constructor() {
     this._playlist = []
-    this._howlerMap = {}
+    // this._howlerMap = {}
     this._currentSong = null
     this._currentHowler = null
 
@@ -27,7 +27,7 @@ class Player {
 
   _play(id, url) {
     this._currentSong = id
-    
+
     if (!url) {
       this.trigger('player:brokenurl', id)
       this.next()
@@ -102,6 +102,10 @@ class Player {
 
     return fetch(url)
       .then(res => res.json())
+  }
+
+  getHowler() {
+    return this._currentHowler
   }
 }
 

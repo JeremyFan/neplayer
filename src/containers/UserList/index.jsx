@@ -81,6 +81,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(playActions.updateList(listName, ids))
     },
 
+    updateVolume(value) {
+      dispatch(playActions.updateVolume(value))
+    },
+
     pause(id) {
       dispatch(playActions.pause(id))
     },
