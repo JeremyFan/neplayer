@@ -3,11 +3,11 @@
  */
 
 import React, { Component } from 'react'
-
-import styles from './index.styl'
 import Icon from '../Icon'
-
+import Volumer from '../Volumer'
 import { getPicUrl } from '../../util'
+import styles from './index.styl'
+
 
 class PlayerBar extends Component {
   constructor(props) {
@@ -43,9 +43,10 @@ class PlayerBar extends Component {
           <Icon className={styles.next} id="next" onClick={() => this.next()} />
         </div>
         <div className={styles.more}>
-          <Icon className={styles.mode} id={"mode-" + modeName} onClick={ ()=> this.changeMode()} />
+          <Icon className={styles.mode} id={"mode-" + modeName} onClick={() => this.changeMode()} />
           <Icon className={styles.volume} id="volume" />
-          <progress className={styles.volumeProgress} value={volume} max="100" onClick={e=>this.changeVolume(e)}></progress>
+          {/* <progress className={styles.volumeProgress} value={volume} max="100" onClick={e => this.changeVolume(e)}></progress> */}
+          <Volumer value={volume} onChange={v => this.updateVolume(v)} />
           <div className={styles.time}>
             00:50 / 04:02
           </div>
@@ -76,8 +77,11 @@ class PlayerBar extends Component {
     window.player.next()
   }
 
-  changeVolume(e){
-    
+  updateVolume(value) {
+    const howler = window.player.getHowler()
+
+    howler.volume(value / 100)
+    this.props.updateVolume(value)
   }
 }
 
