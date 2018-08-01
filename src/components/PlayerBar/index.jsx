@@ -5,7 +5,7 @@
 import React, { Component } from 'react'
 import Icon from '../Icon'
 import Volumer from '../Volumer'
-import { getPicUrl } from '../../util'
+import { getPicUrl, getDuration } from '../../util'
 import styles from './index.styl'
 
 
@@ -16,14 +16,33 @@ class PlayerBar extends Component {
     window.player
       .on('player:play', songId => {
         props.playSong(songId)
+        this.setSeekInterval()
       })
       .on('player:pause', songId => {
         props.pause(songId)
+        this.clearSeekInterval()
       })
   }
 
+  setSeekInterval() {
+    const { updateProps } = this.props
+
+    if (!this.timer) {
+      this.timer = setInterval(() => {
+        const howler = window.player.getHowler()
+        updateProps({
+          seek: getDuration(howler.seek() * 1000)
+        })
+      }, 500)
+    }
+  }
+
+  clearSeekInterval() {
+    clearInterval(this.timer)
+  }
+
   render() {
-    const { song, mode, playing, volume } = this.props
+    const { song, mode, playing, volume, seek } = this.props
 
     if (!song) return null
 
@@ -45,14 +64,18 @@ class PlayerBar extends Component {
         <div className={styles.more}>
           <Icon className={styles.mode} id={"mode-" + modeName} onClick={() => this.changeMode()} />
           <Icon className={styles.volume} id="volume" />
-          {/* <progress className={styles.volumeProgress} value={volume} max="100" onClick={e => this.changeVolume(e)}></progress> */}
-          <Volumer value={volume} onChange={v => this.updateVolume(v)} />
+          <progress className={styles.volumeProgress} value={volume} max="100" onClick={e => this.changeVolume(e)}></progress>
+          {/* <Volumer value={volume} onChange={v => this.updateVolume(v)} /> */}
           <div className={styles.time}>
-            00:50 / 04:02
+            {seek} / {getDuration(song.dt)}
           </div>
         </div>
       </div>
     )
+  }
+
+  componentWillUnmount() {
+    this.clearSeekInterval()
   }
 
   changeMode() {
@@ -62,6 +85,7 @@ class PlayerBar extends Component {
 
   togglePlay(songId) {
     const { playing } = this.props
+
     if (playing) {
       window.player.pause(songId)
     } else {

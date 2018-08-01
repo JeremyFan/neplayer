@@ -4,6 +4,7 @@
  */
 
 const ActionTypes = {
+  UPDATE_PROPS: Symbol(),
   PLAY_SONG: Symbol(),
   PAUSE: Symbol(),
   PREV: Symbol(),
@@ -14,6 +15,13 @@ const ActionTypes = {
 }
 
 const actions = {
+  updateProps(payload) {
+    return {
+      type: ActionTypes.UPDATE_PROPS,
+      payload,
+    }
+  },
+
   /**
    * 播放id
    * @param {Number} id 歌曲id

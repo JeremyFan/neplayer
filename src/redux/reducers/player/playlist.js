@@ -15,9 +15,17 @@ const initialState = {
   // 是否正在播放
   playing: false,
   volume: 50,
+  // 当前播放进度
+  seek: '00:00',
 }
 
 export default (state = initialState, { type, payload }) => {
+  if (type === ActionTypes.UPDATE_PROPS) {
+    return {
+      ...state,
+      ...payload,
+    }
+  }
   if (type === ActionTypes.PLAY_SONG
     || type === ActionTypes.CHANGE_MODE
     || type === ActionTypes.PAUSE

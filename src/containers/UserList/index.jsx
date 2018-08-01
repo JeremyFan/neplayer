@@ -85,6 +85,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(playActions.updateVolume(value))
     },
 
+    updateProps(payload) {
+      dispatch(playActions.updateProps(payload))
+    },
+
     pause(id) {
       dispatch(playActions.pause(id))
     },
