@@ -22,7 +22,7 @@ export default function Handle({
         height: 12,
         cursor: 'pointer',
         borderRadius: '50%',
-        backgroundColor: '#eee',
+        backgroundColor: '#ddd',
       }}
       {...getHandleProps(id)}
     />

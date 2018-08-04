@@ -8,7 +8,7 @@ export default function Track({ source, target, getTrackProps }) {
         position: 'absolute',
         height: 3,
         zIndex: 1,
-        backgroundColor: '#eee',
+        backgroundColor: 'rgba(255,255,255,0.8)',
         cursor: 'pointer',
         left: `${source.percent}%`,
         width: `${target.percent - source.percent}%`,
