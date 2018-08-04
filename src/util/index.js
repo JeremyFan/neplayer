@@ -40,8 +40,26 @@ function getPicUrl(url, size) {
   return result
 }
 
+/**
+ * 生成随机播放数组
+ * Fisher-Yates随机算法
+ */
+function shuffle(list) {
+  let arr = [...list]
+
+  for (let i = list.length - 1; i >= 0; i--) {
+    const n = Math.floor(Math.random() * (i + 1))
+    const element = arr[n]
+    arr[n] = arr[i]
+    arr[i] = element
+  }
+
+  return arr
+}
+
 export {
   getPublishYear,
   getDuration,
   getPicUrl,
+  shuffle,
 }
