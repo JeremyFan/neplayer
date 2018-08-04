@@ -6,6 +6,8 @@ import { howlConfig } from './config'
 class Player {
   constructor() {
     this._playlist = []
+    // 默认顺序播放
+    this.mode = 0;
     // this._howlerMap = {}
     this._currentSong = null
     this._currentHowler = null
@@ -40,6 +42,13 @@ class Player {
 
     this._currentHowler = this._createHowler(id, url)
     this._currentHowler.play()
+    this._currentHowler.on('end', () => {
+      if (this._mode === 1) {
+        this.play(this._currentSong)
+      } else {
+        this.next()
+      }
+    })
 
     this.trigger('player:play', id)
   }
@@ -59,6 +68,18 @@ class Player {
     if (Array.isArray(list)) {
       this._playlist = list
     }
+
+    return this
+  }
+
+  setMode(mode) {
+    if (mode === 0 || mode === 1 || mode === 2) {
+      this._mode = mode
+    } else {
+      console.error('invalid mode')
+    }
+
+    return this
   }
 
   pause(id) {

@@ -5,7 +5,7 @@
 import React, { Component } from 'react'
 import Icon from '../Icon'
 import Volumer from '../Volumer'
-import { getPicUrl, getDuration } from '../../util'
+import { getPicUrl, getDuration, shuffle } from '../../util'
 import styles from './index.styl'
 
 
@@ -78,8 +78,20 @@ class PlayerBar extends Component {
   }
 
   changeMode() {
-    const { mode } = this.props
-    this.props.changeMode(mode)
+    const { mode, songs, current } = this.props
+    const nextMode = (mode + 1) % 3
+    let list = songs.map(song => song.id)
+
+    if (nextMode === 2) {
+      list = shuffle(list)
+    }
+
+    this.props.updateProps({
+      mode: nextMode,
+      list
+    })
+
+    window.player.setList(list).setMode(nextMode)
   }
 
   togglePlay(songId) {
