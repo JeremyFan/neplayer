@@ -6,10 +6,9 @@ export default function Track({ source, target, getTrackProps }) {
     <div
       style={{
         position: 'absolute',
-        height: 14,
+        height: 3,
         zIndex: 1,
-        backgroundColor: '#7aa0c4',
-        borderRadius: 7,
+        backgroundColor: '#eee',
         cursor: 'pointer',
         left: `${source.percent}%`,
         width: `${target.percent - source.percent}%`,

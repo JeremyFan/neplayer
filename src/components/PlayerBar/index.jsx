@@ -64,8 +64,7 @@ class PlayerBar extends Component {
         <div className={styles.more}>
           <Icon className={styles.mode} id={"mode-" + modeName} onClick={() => this.changeMode()} />
           <Icon className={styles.volume} id="volume" />
-          <progress className={styles.volumeProgress} value={volume} max="100" onClick={e => this.changeVolume(e)}></progress>
-          {/* <Volumer value={volume} onChange={v => this.updateVolume(v)} /> */}
+          <Volumer value={volume} onChange={v => this.updateVolume(v)} />
           <div className={styles.time}>
             {seek} / {getDuration(song.dt)}
           </div>

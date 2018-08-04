@@ -20,7 +20,7 @@ function getPublishYear(time) {
  * 236080 -> 03:56
  */
 function getDuration(duration) {
-  if (!duration || duration <= 0) return
+  if (!duration || duration <= 0) return '00:00'
 
   const minutes = Math.floor(duration / 60000)
   const seconds = Math.round((duration % 60000) / 1000)

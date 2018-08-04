@@ -11,10 +11,9 @@ const sliderStyle = {
 const railStyle = {
   position: 'absolute',
   width: '100%',
-  height: 14,
-  borderRadius: 7,
+  height: 3,
   cursor: 'pointer',
-  backgroundColor: 'rgb(155,155,155)',
+  backgroundColor: 'rgba(255,255,255,0.2)',
 }
 
 const domain = [0, 100]
@@ -29,7 +28,7 @@ class Example extends Component {
     const { value } = this.props
 
     return (
-      <div style={{ height: 120, width: '100%' }}>
+      <div style={{ height: 3, width: 100 }}>
         <Slider
           mode={1}
           step={1}

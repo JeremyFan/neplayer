@@ -15,15 +15,14 @@ export default function Handle({
       style={{
         left: `${percent}%`,
         position: 'absolute',
-        marginLeft: '-11px',
-        marginTop: '-6px',
+        marginLeft: '-5px',
+        marginTop: '-5px',
         zIndex: 2,
-        width: 24,
-        height: 24,
+        width: 12,
+        height: 12,
         cursor: 'pointer',
         borderRadius: '50%',
-        boxShadow: '1px 1px 1px 1px rgba(0, 0, 0, 0.2)',
-        backgroundColor: '#34568f',
+        backgroundColor: '#eee',
       }}
       {...getHandleProps(id)}
     />
