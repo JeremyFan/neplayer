@@ -20,10 +20,14 @@ class Player {
       this._currentHowler.play()
       this.trigger('player:play', id)
     } else {
+      this._play(id, `http://music.163.com/song/media/outer/url?id=${id}.mp3`)
+
+      /*
       this.fetchLink(id)
         .then(({ data }) => {
           this._play(id, data[0].url)
         })
+      */
     }
   }
 
