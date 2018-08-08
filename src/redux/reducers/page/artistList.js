@@ -6,6 +6,7 @@ import { ActionTypes } from '../../actions/page/artistlist'
 
 const initialState = {
   songs: [],
+  privileges: [],
   artist: {
     name: '',
     picUrl: ''

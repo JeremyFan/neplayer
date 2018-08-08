@@ -43,9 +43,9 @@ class Songlist extends Component {
     const { songs, current, playing, privileges } = this.props
 
     const songItems = songs.map((song, i) => {
-      const privilege = privileges.filter(privilege => song.id == privilege.id)
+      const privilege = privileges.find(privilege => song.id == privilege.id)
 
-      const isOffline = privilege.length === 0 || privilege[0].st === -200
+      const isOffline = privileges.length > 0 && (privilege.length === 0 || privilege.st === -200)
 
       return (
         <Song

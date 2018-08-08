@@ -6,6 +6,7 @@ import { ActionTypes } from '../../actions/page/albumlist'
 
 const initialState = {
   songs: [],
+  privileges: [],
   album: {
     artists: [],
     publishTime: 0
