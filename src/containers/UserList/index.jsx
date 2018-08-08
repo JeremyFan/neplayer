@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 
 import actions from '../../redux/actions/page/userlist'
@@ -20,9 +19,9 @@ class Artist extends Component {
   }
 
   render() {
-    const { songs, info, current, mode } = this.props
+    const { songs, info, current } = this.props
 
-    const currentSong = this.getCurrentSongs(songs, current)
+    const currentSong = this.getCurrentSong(songs, current)
     const coverUrl = this.getCover(info, currentSong)
 
     return (
@@ -37,14 +36,13 @@ class Artist extends Component {
             <Songlist {...this.props} />
           </Scrollbar>
         </section>
-        {/* <PlayerBar song={currentSong} mode={mode} /> */}
         <PlayerBar song={currentSong} {...this.props} />
         <Background imgUrl={coverUrl} />
       </div>
     )
   }
 
-  getCurrentSongs(songs, id) {
+  getCurrentSong(songs, id) {
     return songs.find(s => s.id === id)
   }
 
@@ -91,14 +89,6 @@ const mapDispatchToProps = dispatch => {
 
     pause(id) {
       dispatch(playActions.pause(id))
-    },
-
-    prev() {
-
-    },
-
-    next() {
-
     },
 
     changeMode(currentMode) {
