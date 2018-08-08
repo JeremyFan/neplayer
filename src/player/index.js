@@ -1,4 +1,5 @@
 import 'howler'
+import { SITE_URL } from 'constants'
 import Events from './events'
 import { howlConfig } from './config'
 
@@ -20,7 +21,7 @@ class Player {
       this._currentHowler.play()
       this.trigger('player:play', id)
     } else {
-      this._play(id, `http://music.163.com/song/media/outer/url?id=${id}.mp3`)
+      this._play(id, `${SITE_URL}song/media/outer/url?id=${id}.mp3`)
 
       /*
       this.fetchLink(id)
@@ -46,6 +47,12 @@ class Player {
 
     this._currentHowler = this._createHowler(id, url)
     this._currentHowler.play()
+    // 无法加载资源
+    this._currentHowler.on('loaderror', () => {
+      this.trigger('player:brokenurl', id)
+      this.next()
+      return
+    })
     this._currentHowler.on('end', () => {
       if (this._mode === 1) {
         this.play(this._currentSong)
