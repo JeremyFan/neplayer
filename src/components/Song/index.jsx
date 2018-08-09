@@ -16,8 +16,8 @@ const Song = props => {
         key={ar.id}
         target="_blank"
         href={`${SITE_URL}/#/artist?id=${ar.id}`}
-        onClick={e => e.stopPropagation()}>{al.name}
-        >
+        onClick={e => e.stopPropagation()}
+      >
         {ar.name}
       </a>
     ))
